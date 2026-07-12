@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechSupport Studio - Panel Inteligente</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Animación de pulsación sutil para elementos activos */
+        @keyframes pulse-glow {
+            0%, 100% { opacity: 0.6; }
+            50% { opacity: 1; filter: drop-shadow(0 0 15px rgba(34, 197, 94, 0.6)); }
+        }
+        .glow-effect {
+            animation: pulse-glow 3s infinite;
+        }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 font-sans min-h-screen selection:bg-emerald-500 selection:text-slate-950">
+
+    <!-- Fondo decorativo con luces difuminadas (Glow) -->
+    <div class="absolute top-0 left-1/4 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none"></div>
+    <div class="absolute bottom-10 right-1/4 w-96 h-96 bg-indigo-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+    <!-- NAVBAR PREMIUM -->
+    <nav class="sticky top-0 z-50 bg-slate-900/80 backdrop-blur-md border-b border-slate-800 p-4 shadow-xl">
+        <div class="container mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
+            <!-- Integración del Logo y Título -->
+            <div class="flex items-center gap-4">
+                <img src="/static/Gemini_Generated_Image_qt3qpmqt3qpmqt3q.png" alt="TechSupport Studio Logo" class="w-14 h-14 rounded-xl shadow-lg border border-emerald-500/30 object-cover">
+                <div>
+                    <h1 class="text-2xl font-black tracking-tight bg-gradient-to-r from-emerald-400 via-teal-400 to-indigo-400 bg-clip-text text-transparent">
+                        TECHSUPPORT STUDIO
+                    </h1>
+                    <p class="text-xs text-slate-400 tracking-widest uppercase font-semibold">Mantenimiento & Respaldo Digital Inteligente</p>
+                </div>
+            </div>
+            <!-- Estado de conexión simulado -->
+            <div class="flex items-center gap-2 bg-slate-950 px-3 py-1.5 rounded-full border border-slate-800 text-xs">
+                <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 glow-effect"></span>
+                <span class="text-slate-300 font-mono">NÚCLEO ACTIVO</span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main class="relative container mx-auto p-4 md:p-8 grid grid-cols-1 lg:grid-cols-3 gap-8">
+        
+        <!-- SECCIÓN 1: ESTADO DEL SISTEMA (DIAGNÓSTICO) -->
+        <div class="bg-slate-900/60 border border-slate-800 rounded-2xl p-6 shadow-2xl backdrop-blur-sm flex flex-col justify-between">
+            <div>
+                <div class="flex items-center justify-between mb-6">
+                    <h2 class="text-lg font-bold text-slate-200 flex items-center gap-2">
+                        <span class="p-2 rounded-lg bg-teal-500/10 text-teal-400">📊</span> Analizador de Almacenamiento
+                    </h2>
+                    <span class="text-xs bg-slate-800 text-slate-400 px-2 py-1 rounded font-mono" id="porcentaje-texto">0%</span>
+                </div>
+
+                <!-- Barra de Progreso Avanzada -->
+                <div class="space-y-2 mb-6">
+                    <div class="w-full bg-slate-950 h-5 rounded-full p-1 border border-slate-800 overflow-hidden">
+                        <div id="barra-progreso" class="h-full rounded-full bg-gradient-to-r from-teal-500 to-emerald-400 shadow-[0_0_15px_rgba(52,211,153,0.3)] transition-all duration-700 ease-out" style="width: 0%"></div>
+                    </div>
+                </div>
+
+                <!-- Tarjetas de datos específicas -->
+                <div class="grid grid-cols-3 gap-3 text-center mb-4">
+                    <div class="bg-slate-950/80 p-3 rounded-xl border border-slate-800/60">
+                        <span class="block text-slate-500 text-[10px] uppercase tracking-wider font-bold mb-1">Capacidad</span>
+                        <b class="text-sm font-mono text-slate-200" id="disco-total">0 GB</b>
+                    </div>
+                    <div class="bg-slate-950/80 p-3 rounded-xl border border-slate-800/60">
+                        <span class="block text-slate-500 text-[10px] uppercase tracking-wider font-bold mb-1">En Uso</span>
+                        <b class="text-sm font-mono text-teal-400" id="disco-usado">0 GB</b>
+                    </div>
+                    <div class="bg-slate-950/80 p-3 rounded-xl border border-slate-800/60">
+                        <span class="block text-slate-500 text-[10px] uppercase tracking-wider font-bold mb-1">Disponible</span>
+                        <b class="text-sm font-mono text-emerald-400" id="disco-libre">0 GB</b>
+                    </div>
+                </div>
+            </div>
+
+            <button onclick="cargarEstadoSistema()" class="w-full mt-4 bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-200 hover:text-white font-medium py-2.5 px-4 rounded-xl transition duration-300 flex items-center justify-center gap-2 shadow-lg">
+                🔄 Recargar Diagnóstico
+            </button>
+        </div>
+
+        <!-- SECCIÓN 2: MÓDULO DE RESPALDO AVANZADO -->
+        <div class="lg:col-span-2 bg-gradient-to-br from-slate-900/90 to-slate-900/40 border border-slate-800 rounded-2xl p-6 shadow-2xl backdrop-blur-sm">
+            <h2 class="text-lg font-bold text-slate-200 flex items-center gap-2 mb-6">
+                <span class="p-2 rounded-lg bg-emerald-500/10 text-emerald-400">🛡️</span> Configuración de Respaldo Seguro
+            </h2>
+            
+            <div class="space-y-4">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Directorio Origen</label>
+                        <div class="relative">
+                            <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-slate-500 text-sm">📁</span>
+                            <input type="text" id="origen" placeholder="Ej: C:\Users\Archivos" 
+                                   class="w-full bg-slate-950 border border-slate-800 rounded-xl pl-9 pr-3 py-3 text-sm focus:outline-none focus:border-emerald-500 text-slate-200 transition placeholder:text-slate-600 font-mono">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Directorio Destino (Backup)</label>
+                        <div class="relative">
+                            <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-slate-500 text-sm">💾</span>
+                            <input type="text" id="destino" placeholder="Ej: D:\MiBackup" 
+                                   class="w-full bg-slate-950 border border-slate-800 rounded-xl pl-9 pr-3 py-3 text-sm focus:outline-none focus:border-emerald-500 text-slate-200 transition placeholder:text-slate-600 font-mono">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pt-2">
+                    <button onclick="ejecutarRespaldo()" class="w-full bg-gradient-to-r from-emerald-600 to-teal-500 hover:from-emerald-500 hover:to-teal-400 text-slate-950 font-black py-3.5 px-4 rounded-xl transition duration-300 shadow-[0_4px_20px_rgba(16,185,129,0.2)] hover:shadow-[0_4px_25px_rgba(16,185,129,0.4)] tracking-wide uppercase text-sm">
+                        🚀 Ejecutar Copia de Seguridad Automática
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECCIÓN 3: HISTORIAL PERSISTENTE (SQLITE) -->
+        <div class="bg-slate-900/60 border border-slate-800 rounded-2xl p-6 shadow-2xl backdrop-blur-sm lg:col-span-3">
+            <h2 class="text-lg font-bold text-slate-200 flex items-center gap-2 mb-4">
+                <span class="p-2 rounded-lg bg-indigo-500/10 text-indigo-400">📜</span> Registro Histórico Base de Datos (SQLite)
+            </h2>
+            <div class="overflow-hidden rounded-xl border border-slate-800 bg-slate-950/50">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-sm">
+                        <thead class="bg-slate-950 text-slate-400 text-xs uppercase tracking-wider border-b border-slate-800">
+                            <tr>
+                                <th class="p-4 font-semibold">Timestamp</th>
+                                <th class="p-4 font-semibold">Ruta Origen</th>
+                                <th class="p-4 font-semibold">Ruta Destino</th>
+                                <th class="p-4 font-semibold text-center">Estado del Proceso</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tabla-historial" class="divide-y divide-slate-800/50 text-slate-300">
+                            <!-- Se llena mediante JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="mt-12 border-t border-slate-900 bg-slate-950/80 p-6 text-center text-xs text-slate-600 font-mono">
+        TechSupport Studio &copy; 2026 | Sistema de Soporte Técnico Autónomo Avanzado
+    </footer>
+
+    <!-- LÓGICA DE INTERACCIÓN -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            cargarEstadoSistema();
+            cargarHistorial();
+        });
+
+        function cargarEstadoSistema() {
+            fetch('/api/sistema')
+                .then(res => res.json())
+                .then(data => {
+                    document.getElementById('porcentaje-texto').innerText = data.porcentaje + "% EN USO";
+                    document.getElementById('barra-progreso').style.width = data.porcentaje + "%";
+                    document.getElementById('disco-total').innerText = data.total + " GB";
+                    document.getElementById('disco-usado').innerText = data.usado + " GB";
+                    document.getElementById('disco-libre').innerText = data.libre + " GB";
+                    
+                    // Cambiar color si el almacenamiento está muy lleno (>85%)
+                    const barra = document.getElementById('barra-progreso');
+                    if(data.porcentaje > 85) {
+                        barra.classList.remove('from-emerald-600', 'to-teal-500');
+                        barra.classList.add('from-rose-600', 'to-orange-500');
+                    } else {
+                        barra.classList.remove('from-rose-600', 'to-orange-500');
+                        barra.classList.add('from-emerald-600', 'to-teal-500');
+                    }
+                });
+        }
+
+        function ejecutarRespaldo() {
+            const origen = document.getElementById('origen').value;
+            const destino = document.getElementById('destino').value;
+
+            if(!origen || !destino) {
+                alert("⚠️ Por favor especifique las rutas de Origen y Destino.");
+                return;
+            }
+
+            fetch('/api/respaldo', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ origen, destino })
+            })
+            .then(res => res.json())
+            .then(data => {
+                alert(data.message);
+                cargarHistorial();
+                cargarEstadoSistema();
+            })
+            .catch(err => alert("❌ Falló la comunicación con el núcleo del sistema."));
+        }
+
+        function cargarHistorial() {
+            fetch('/api/historial')
+                .then(res => res.json())
+                .then(data => {
+                    const tabla = document.getElementById('tabla-historial');
+                    tabla.innerHTML = "";
+                    if(data.length === 0) {
+                        tabla.innerHTML = `<tr><td colspan="4" class="p-8 text-center text-slate-600 font-mono text-xs">Aún no se registran transacciones en el historial.</td></tr>`;
+                    }
+                    data.forEach(item => {
+                        tabla.innerHTML += `
+                            <tr class="hover:bg-slate-900/40 transition duration-150">
+                                <td class="p-4 text-slate-400 font-mono text-xs">${item.fecha}</td>
+                                <td class="p-4 font-mono text-xs max-w-xs truncate text-slate-300" title="${item.origen}">${item.origen}</td>
+                                <td class="p-4 font-mono text-xs max-w-xs truncate text-slate-300" title="${item.destino}">${item.destino}</td>
+                                <td class="p-4 text-center">
+                                    <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold tracking-wider uppercase bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> ${item.estado}
+                                    </span>
+                                </td>
+                            </tr>
+                        `;
+                    });
+                });
+        }
+    </script>
+</body>
+</html>
